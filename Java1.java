@@ -748,3 +748,103 @@ import static java.lang.Math.random;
             }
         }
     }
+
+//2.1.1
+import java.util.*;
+public class Main {
+
+
+    public static void main(String[] args) {
+
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter N->");
+        int N = in.nextInt();
+        int A[][] = new int[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int k = 0; k < N; k++) {
+                System.out.print("Enter A["+i+"]["+k+"]-> ");
+                A[i][k] = in.nextInt();
+            }
+            System.out.println("The "+i+" column is full, Enter next one ");
+
+        }
+        for (int i = 0; i<A.length;i++){
+            for(int k = 0; k<A.length;k++){
+                if(i%2 == 0 || i == 0){
+                    if(A[i][0] > A[i][A.length-1]){
+                        System.out.print(A[i][k]+ " ");
+                    }
+                }
+            }
+            System.out.println("");
+        }
+    }
+}
+
+//2.1.2
+import java.util.*;
+public class Main {
+
+
+    public static void main(String[] args) {
+
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter N->");
+        int N = in.nextInt();
+        int A[][] = new int[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int k = 0; k < N; k++) {
+                System.out.print("Enter A["+i+"]["+k+"]-> ");
+                A[i][k] = in.nextInt();
+            }
+            System.out.println("The "+i+" column is full, Enter next one ");
+
+        }
+        for (int i = 0; i<A.length;i++){
+            for(int k = 0; k<A.length;k++){
+                if(i==k){
+                    System.out.print(A[i][k]+" ");
+                }
+            }
+            System.out.println("");
+        }
+    }
+}
+
+//2.1.3
+import java.util.*;
+public class Main {
+
+
+    public static void main(String[] args) {
+
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter N->");
+        int N = in.nextInt();
+        System.out.print("Enter K->");
+        int K = in.nextInt();
+        System.out.print("Enter P->");
+        int P =in.nextInt();
+        int A[][] = new int[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int k = 0; k < N; k++) {
+                System.out.print("Enter A["+i+"]["+k+"]-> ");
+                A[i][k] = in.nextInt();
+            }
+            System.out.println("The "+i+" column is full, Enter next one\n");
+
+        }
+        for (int i = 0; i<A.length;i++){
+            for(int k = 0; k<A.length;k++){
+                if(i == K)System.out.print(A[i][k]+ " ");
+                else if(k == P){
+                    if(P>0){
+                        for (int j = 0; j<P; j++) System.out.print("  ");
+                    }
+                    System.out.print(A[i][k]);
+                }
+            }
+            System.out.println("");
+        }
+    }
+}
