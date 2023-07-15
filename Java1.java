@@ -848,3 +848,216 @@ public class Main {
         }
     }
 }
+
+//2.1.4
+import java.util.*;
+public class Main {
+
+
+    public static void main(String[] args) {
+
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter n->");
+        int N = in.nextInt();
+        int A[][] = new int[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int k = 0; k < N; k++) {
+                if(i%2 != 0 ) {
+                    A[i][k] = N - k;
+                } else {
+                    A[i][k] = k+1;
+                }
+            }
+        }
+        for (int i = 0; i<A.length;i++){
+            for(int k = 0; k<A.length;k++){
+                System.out.print(A[i][k]+ " ");
+                }
+            System.out.println(" ");
+            }
+        }
+    }
+
+//2.1.5
+import java.util.*;
+public class Main {
+
+
+    public static void main(String[] args) {
+
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter onn- n->");
+        int N = in.nextInt();
+        int A[][] = new int[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int k = 0; k < N; k++) {
+               if(N< k+i+1)A[i][k] = 0;
+               else A[i][k] = i+1;
+            }
+        }
+        for (int i = 0; i<A.length;i++){
+            for(int k = 0; k<A.length;k++){
+                System.out.print(A[i][k]+ " ");
+                }
+            System.out.println(" ");
+            }
+        }
+    }
+
+//2.1.6
+import java.util.*;
+public class Main {
+
+
+    public static void main(String[] args) {
+
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter onn- n->");
+        int N = in.nextInt();
+        int A[][] = new int[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int k = 0; k < N; k++) {
+                if(N<k+i+1 || k<i ) A[i][k] = 0;
+                else A[i][k] = 1;
+                if(i >= N/2){
+                    if(N>k+i+1 || k>i ) A[i][k] = 0;
+                    else A[i][k] = 1;
+                }
+            }
+        }
+        for (int i = 0; i<A.length;i++){
+            for(int k = 0; k<A.length;k++){
+                System.out.print(A[i][k]+ " ");
+                }
+            System.out.println(" ");
+            }
+        }
+    }
+
+//2.1.7
+import java.util.*;
+import static java.lang.Math.pow;
+import static java.lang.Math.sin;
+
+public class Main {
+
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter onn- n->");
+        int N = in.nextInt();
+        float sum = 0;
+        float A[][] = new float[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int k = 0; k < N; k++){
+                A[i][k] = (float) sin((pow(i, 2)- pow(k, 2))/N);
+                if (A[i][k] > 0 ) sum += A[i][k];
+            }
+        }
+        for (int i = 0; i<A.length;i++){
+            for(int k = 0; k<A.length;k++){
+                System.out.print(A[i][k]+ " ");
+                }
+            System.out.println(" ");
+            }
+        System.out.println("Sum= " + sum);
+        }
+    }
+
+//2.1.8
+import java.util.*;
+import static java.lang.Math.*;
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter onn- n->");
+        int N = in.nextInt();
+
+        int A[][] = new int[N][N];
+        int B[] = new int[N];
+        for (int i = 0; i < N; i++) {
+            for (int k = 0; k < N; k++) {
+                A[i][k] = (int) (random() * 100);
+                System.out.print(A[i][k] + "\t");
+            }
+            System.out.println(" ");
+        }
+        
+        System.out.println("Enter number of first column->");
+        int j = in.nextInt();
+        System.out.println("Enter number of second column->");
+        int j1 = in.nextInt();
+
+        for (int i = 0; i < N; i++) {
+            B[i] = A[i][j];
+            A[i][j] = A[i][j1];
+            A[i][j1] = B[i];
+        }
+        for (int i = 0; i < A.length; i++){
+            for (int k = 0; k < A.length; k++){
+                System.out.print(A[i][k] + "\t");
+            }
+            System.out.println(" ");
+        }
+    }
+}
+
+//2.1.9
+{
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter onn- n->");
+        int N = in.nextInt(), sum = 0,sum_m = 0, sum_k = 0;
+
+        int A[][] = new int[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int k = 0; k < N; k++) {
+                A[i][k] = (int) (random() * 100);
+                System.out.print(A[i][k] + "\t");
+            }
+            System.out.println(" ");
+        }
+        
+        for (int i = 0; i< A.length; i++){
+            sum = 0;
+            for (int j = 0; j< A.length; j++){
+                sum += A[j][i];
+            }
+            if(sum_m < sum){
+                sum_m = sum;
+                sum_k = i;
+            }
+        }
+        System.out.println("Max_column index = " + sum_k+ "; Sum = "+sum_m);
+    }
+}
+
+//2.1.10
+import java.util.*;
+import static java.lang.Math.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter onn- n->");
+        int N = in.nextInt(), sum = 0,sum_m = 0, sum_k = 0;
+
+        int A[][] = new int[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int k = 0; k < N; k++) {
+                A[i][k] = (int) (random() * 100-50);
+                System.out.print(A[i][k] + "\t");
+            }
+            System.out.println(" ");
+        }
+        for (int i = 0; i< A.length; i++){
+            for (int j = 0; j<A.length;j++){
+                if(N==i+j+1&& A[i][j] > 0 ) System.out.print(A[i][j] +" ");
+            }
+        }
+
+    }
+}
