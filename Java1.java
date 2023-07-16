@@ -1061,3 +1061,208 @@ public class Main {
 
     }
 }
+
+//2.1.11
+public class Main {
+
+    public static void main(String[] args) {
+
+
+        int A[][] = new int[10][20];
+        int p = 0;
+        for (int i = 0; i < 10; i++) {
+            for (int k = 0; k < 20; k++) {
+                A[i][k] = (int) (Math.random() * 16);
+                if (A[i][k] == 5) p++;
+            }
+            if (p >= 3) {
+                System.out.println("In line " + i + " 5 occurs more than 3 times or equal");
+                p = 0;
+            }
+        }
+        
+        for (int i =0 ; i < 10; i++ ){
+            for (int j = 0; j < 20; j++){
+                System.out.print(A[i][j]+ "\t");
+            }
+            System.out.println(" ");
+        }
+    }
+}
+
+//2.1.12
+import java.util.Arrays;
+
+
+public class Main {
+
+    public static void main(String[] args) {
+        int A[][] = {
+        {5, 2, 7, 3},
+        {1, 8, 4, 6},
+        {9, 0, 11, 10}
+    };
+        //сортировка по возрастанию
+        for (int i = 0; i <A.length; i++) {
+            Arrays.sort(A[i]);
+        }
+
+        //вывод
+        for (int i =0 ; i <A.length; i++ ){
+            for (int j = 0; j < A.length+1; j++){
+                System.out.print(A[i][j]+ "\t");
+            }
+            System.out.println(" ");
+        }
+        
+        System.out.println("Second part of the task ");
+        int k , t;
+        //cортировка по убыванию
+        for (int i  =0; i< A.length; i++){
+            k = A.length;
+            int j = 0;
+               while(k> j){
+                   t = A[i][j];
+                   A[i][j] = A[i][k];
+                   A[i][k] = t;
+                   k--;
+                   j++;
+            }
+        }
+
+        for (int i =0 ; i <A.length; i++ ){
+            for (int j = 0; j < A.length+1; j++){
+                System.out.print(A[i][j]+ "\t");
+            }
+            System.out.println(" ");
+        }
+    }
+}
+
+//2.1.13
+public class Main {
+
+    public static void main(String[] args) {
+        int A[][] = {
+        {5, 2, 7, 3},
+        {1, 8, 4, 6},
+        {9, 0, 11, 10}
+    };
+        //сортировка по возрастанию
+        int k , t;
+        for (int i = 0; i <A.length+1; i++) {
+            for (int j =0; j < A.length-1;){
+                if(A[j][i] >A[j+1][i]){ 
+                    t = A[j][i];
+                    A[j][i] = A[j+1][i];
+                    A[j+1][i] = t;
+                    j = 0;                      //обнуляем если была перестановка
+                }else {
+                    j++;
+                }
+            }
+        }
+        //вывод
+        for (int i =0 ; i <A.length; i++ ){
+            for (int j = 0; j < A.length+1; j++){
+                System.out.print(A[i][j]+ "\t");
+            }
+            System.out.println(" ");
+        }
+
+        System.out.println("Second part of the task ");
+
+        //cортировка по убыванию
+        for (int i  =0; i< A.length+1; i++){
+            k = A.length-1;
+            int j = 0;
+               while(k> j){
+                   t = A[j][i];
+                   A[j][i] = A[k][i];
+                   A[k][i] = t;
+                   k--;
+                   j++;
+            }
+        }
+
+        for (int i =0 ; i <A.length; i++ ){
+            for (int j = 0; j < A.length+1; j++){
+                System.out.print(A[i][j]+ "\t");
+            }
+            System.out.println(" ");
+        }
+    }
+}
+
+//2.1.14
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Enter m-> ");
+        int m = scan.nextInt();
+        System.out.print("Enter n->");
+        int n = scan.nextInt();
+
+        int A[][] = new int[m][n];
+
+        for (int i = 0; i <m; i++) {
+            for (int j =0; j <n;j++){
+                      if(j-i>0) A[i][j] = 1;
+                }
+            }
+        
+        for (int i =0; i < m; i++){
+            for (int j = 0; j < n; j++){
+                System.out.print(A[i][j] + "\t");
+            }
+            System.out.println(" ");
+        }
+        
+    }
+}
+
+//2.1.15
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Enter m-> ");
+        int m = scan.nextInt();
+        System.out.print("Enter n->");
+        int n = scan.nextInt();
+
+        int A[][] = new int[m][n];
+
+        int max = 0;
+        for (int i = 0; i <m; i++) {
+            for (int j =0; j <n;j++){
+                A[i][j] = (int)(Math.random()*100);
+                System.out.print(A[i][j] + "\t");
+                 if(A[i][j] > max){
+                     max = A[i][j];
+                 }
+            }
+            System.out.println(" ");
+        }
+        
+        System.out.println("");
+        
+        for (int i =0; i < m; i++){
+            for (int j = 0; j < n; j++){
+                if(A[i][j] % 2 != 0){
+                    A[i][j] = max;
+                }
+                System.out.print(A[i][j] + "\t");
+            }
+            System.out.println(" ");
+        }
+
+    }
+}
+
+//2.1.16
