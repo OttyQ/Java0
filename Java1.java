@@ -1266,3 +1266,57 @@ public class Main {
 }
 
 //2.1.16
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter N (odd)-> ");
+        int size = scanner.nextInt();
+
+        if (size % 2 == 0) {
+            System.out.println("N must be odd!");
+            return;
+        }
+
+        int[][] A = createMagicSquare(size);
+
+        System.out.println("Magic square:");
+        printMatrix(A);
+    }
+
+    public static int[][] createMagicSquare(int size) {
+        int[][] magicSquare = new int[size][size];
+        int num = 1;
+        int row = 0;
+        int col = size / 2;
+
+        while (num <= size * size) {
+            magicSquare[row][col] = num;
+            num++;
+
+            int newRow = (row - 1 + size) % size;
+            int newCol = (col + 1) % size;
+
+            if (magicSquare[newRow][newCol] == 0) {
+                row = newRow;
+                col = newCol;
+            } else {
+                row = (row + 1) % size;
+            }
+        }
+
+        return magicSquare;
+    }
+
+    //Вывод
+    public static void printMatrix(int[][] matrix) {
+        for (int[] row : matrix) {
+            for (int element : row) {
+                System.out.print(element + "\t");
+            }
+            System.out.println();
+        }
+    }
+}
