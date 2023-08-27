@@ -1320,3 +1320,148 @@ public class Main {
         }
     }
 }
+
+//2.2.1 // Одномерные массивы. Сортировки
+
+public class Main {
+    public static void main(String[] args) {
+    int [] a = {10, 9, 8, 7, 6,5,4,3,2,1};
+    int [] b = {11,12,4,6,8};
+    int k = 4;
+    a = insertion(a, b, k);
+    for (int i = 0; i < a.length; i++){
+        System.out.print(" " + a[i]);
+    }
+}
+
+    public static int[] insertion(int a[], int b[], int k){
+        int finalLength = a.length + b.length;
+        int [] res = new int[finalLength];
+        int n = 0;
+         for(int i = 0; i < res.length; i++){
+        if(i<k || n > b.length -1) res[i] = a[i-n];
+        else res[i] = b[n];
+        n++;
+        }
+        return  res;
+       
+    }
+}
+
+//2.2.2
+import java.util.Scanner;
+
+    public class Main {
+        public static void main(String[] args) {
+            int[] a = {1, 3, 5, 7, 9};
+            int[] b = {2, 4, 6, 8, 10, 11, 12};
+            a = resultMass(a, b);
+
+            for (int it : a) {
+                System.out.print(it + " ");
+            }
+        }
+
+        private static int[] resultMass(int[] a, int[] b) {
+            int resLength = a.length + b.length;
+            int [] res = new int[resLength];
+            int i = 0;
+            int j = 0;
+            for (int k = 0; k < res.length; k++){
+                if(i < a.length &&(j>=b.length || a[i] <= b[j])){
+                    res[k] = a[i];
+                    i++;
+                }else{
+                    res[k] = b[j];
+                    j++;
+                }
+            }
+            return  res;
+        }
+    }
+
+
+
+
+
+//2.2.3
+    //если изначально отсортирован
+   public class Main {
+        public static void main(String[] args) {
+            int[] a = {1, 5, 5, 6, 9, 12, 15};
+            sortChos(a);
+            for (int it : a) {
+                System.out.print(it + " ");
+            }
+        }
+
+        private static void sortChos(int[] a) {
+            for (int i = 0; i < a.length/2; i++){
+                int temp = a[i];
+                a[i] = a[a.length-1-i];
+                a[a.length-1-i] = temp;
+            }
+        }
+       //or
+      /* private static void sortChos(int[] a) {
+            for (int i = 0; i < a.length; i++){
+                int maxInd = i;
+               for (int k = i+1; k < a.length; k++){
+                   if(a[k] > a[maxInd]) maxInd = k;
+               }
+               int temp = a[i];
+               a[i] = a[maxInd];
+               a[maxInd] = temp;
+            }
+        }*/
+    }
+
+//2.2.4
+ public class Main {
+        public static void main(String[] args) {
+            int[] a = {15, 12, 9, 6, 5, 4, 3, 2, 1};
+            sort(a);
+            for (int it : a) {
+                System.out.print(it + " ");
+            }
+        }
+
+        private static void sort(int[] a) {
+            int counter = 0;
+            for (int i = 0; i < a.length; i++){
+               for (int k = 0; k < a.length-i-1; k++){
+                   if(a[k] > a[k+1]) {
+                       int temp = a[k];
+                       a[k] = a[k+1];
+                       a[k+1] = temp;
+                       counter++;
+                   }
+               }
+
+            }
+            System.out.println("Count of changes: " + counter );
+        }
+    }
+
+//2.2.5
+ public class Main {
+        public static void main(String[] args) {
+            int[] a = {15, 12, 9, 6, 5, 4, 3, 2, 1};
+            sort(a);
+            for (int it : a) {
+                System.out.print(it + " ");
+            }
+        }
+
+        private static void sort(int[] a) {
+            for (int i = 1; i < a.length; i++){
+                int sorted = i -1;
+                while(sorted > -1 && a[sorted] > a[sorted+1]){
+                    int temp = a[sorted];
+                    a[sorted] = a[sorted+1];
+                    a[sorted+1] = temp;
+                    sorted--;
+                }
+            }
+        }
+    }
