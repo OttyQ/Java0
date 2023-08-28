@@ -1465,3 +1465,923 @@ import java.util.Scanner;
             }
         }
     }
+
+//2.2.6
+ public class Main {
+        public static void main(String[] args) {
+            int[] a = {1, 15, 9, 6, 5, 4, 3, 2, 12};
+            sort(a);
+            for (int it : a) {
+                System.out.print(it + " ");
+            }
+
+        }
+
+        private static void sort(int[] a) {
+            int len = a.length;
+            for (int sh = len/2; sh>0; sh/=2 ){
+                for (int i = sh; i < len; i++){
+                    int temp = a[i];
+                    int ti = i;
+                    while(ti>=sh &&a[ti-sh] > temp){
+                        a[ti] = a[ti-sh];
+                        ti -= sh;
+                    }
+                    a[ti] = temp;
+                }
+            }
+        }
+
+    }
+
+//2.2.7
+import java.util.Scanner;
+
+    public class Main {
+        public static void main(String[] args) {
+            int[] q1 = {1, 3, 5, 8, 9};
+            int[] q2 = {2, 4, 6, 10, 11};
+
+            int[] ins = findInsPoints(q1, q2);
+
+            System.out.println("answ:");
+            for (int item : ins) {
+                System.out.print(item + " ");
+            }
+        }
+
+        public static int[] findInsPoints(double[] q1, double[] q2) {
+
+            int[] insPosRes = new int[q2.length]; //cтавим m т.к последовательность q2 может быть больше q1
+            int i = 0; // Индекс для q1
+            int j = 0; // Индекс для q2
+            int k = 0; // Индекс для insPosRes
+
+            while(i < q1.length && j < q2.length) {
+                if (q1[i] <= q2[j]) {
+                    i++;
+                } else {
+                    insPosRes[k] = i;
+                    j++;
+                    k++;
+                }
+            }
+            while(j<q1.length){               //если мы выйдем за пределы
+                    insPosRes[k] = q1.length; //массива q1 то оставшиеся
+                    j++;                      //элементы будут записаны после
+                    k++;                      //последнего эл-та q1
+            }
+            return insPosRes;
+        }
+    }
+
+//2.2.8
+import java.util.Scanner;
+
+    public class Main {
+        public static void main(String[] args) {
+            int[] p = {1, 8, 5, 3, 9};
+            int[] q = {2, 10, 6, 4, 11};
+
+            System.out.println("answ:");
+            int g = findGCD(q);
+            for (int i =0; i < p.length; i++){
+                p[i] = g / q[i];
+                q[i] = g;
+            }
+
+            for (int i = 0; i<p.length-1; i++){
+                for (int j = 0; j < p.length-1; j++){
+                    double pq = (double) p[j]/q[j];
+                    double pq1 = (double) p[j+1]/q[j+1];
+                    if( pq > pq1 ) {
+                        swap(p, j, j+1);
+                        swap(q, j, j+1);
+                    }
+                }
+            }
+            for (int item : p) {
+                System.out.print(item + "\t");
+            }
+            System.out.print("\n");
+            for (int item : q) {
+                System.out.print(item + "\t");
+            }
+        }
+        private static int findGCD(int [] arr ){
+            int res = arr[0];
+            for (int i = 0; i< arr.length; i ++){
+                res = GCD(res, arr[i]);
+            }
+            return res;
+        }
+
+        private static int GCD(int a, int b){
+            int temp = a*b;
+            while(a!=b){
+                if(a>b) a = a-b;
+                else b= b-a;
+            }
+            return temp/a;
+        }
+        public static void swap(int[] arr, int a, int a1){
+            int temp = arr[a];
+            arr[a] = arr[a1];
+            arr[a1] = temp;
+        }
+    }
+
+//2.3.1
+
+    public class Main {
+        public static void main(String[] args) {
+            int p = 23;
+            int q = 32;
+            System.out.print(HOK(p,q));
+        }
+        private static int HOK(int a, int b ){
+            return a*b/GCD(a,b);
+        }
+
+        private static int GCD(int a, int b){
+            while(a!=b){
+                if(a>b) a = a-b;
+                else b= b-a;
+            }
+            return a;
+        }
+    }
+
+//2.3.2
+
+    public class Main {
+        public static void main(String[] args) {
+            int[] p = {1,2,3,4};
+            System.out.print(LCMforArr(p));
+        }
+        private static int LCMforArr(int [] p){
+            int res = p[0];
+            for (int i=1; i < p.length; i++){
+                res = LCM(res, p[i]);
+            }
+            return res;
+        }
+
+        private static int LCM(int a, int b){
+            return (a*b)/GCD(a,b);
+        }
+        private static int GCD(int a, int b){
+            while(a!=b){
+                if(a>b) a = a-b;
+                else b= b-a;
+            }
+            return a;
+        }
+    }
+
+//2.3.3
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
+public class Main {
+        public static void main(String[] args) {
+            int a = 16;
+            System.out.print(findSquare(a));
+        }
+        private static double findSquare(int a){
+            return 6*findTriangleSq(a);
+        }
+
+        private static double findTriangleSq(int a) {
+            return pow(a,2)*sqrt(3)/4;
+        }
+}
+
+//2.2.4
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
+public class Main {
+        public static void main(String[] args) {
+            int [][]coorPoint = {
+                    {1,2},
+                    {3,4},
+                    {5,8},
+                    {4,9}
+            };
+
+            findDist(coorPoint);
+        }
+        private static void findDist(int [][] a){
+          double res = sqrt(pow(a[0][0] - a[1][0], 2)+ pow(a[0][1] - a[1][1],2));
+          int [] pos1 = a[0];
+          int [] pos2 = a[1];
+          for (int i = 0; i < a.length; i++){
+              for (int j =i+1; j < a.length-1; j++){
+                  double temp = sqrt(pow(a[i][0] - a[j][0], 2)+ pow(a[i][1] - a[j][1],2));
+                  if(temp > res){
+                      res = temp;
+                      pos1 = a[i];
+                      pos2 = a[j];
+                  }
+              }
+          }
+          System.out.println(pos1[0]+" " + pos1[1] + " and "+ pos2[0]+ " "+pos2[1]);
+          System.out.println(res);
+        }
+}
+
+//2.2.5
+import java.util.Arrays;
+
+
+public class Main {
+        public static void main(String[] args) {
+            int []a = {1,2,10,34,234,15,68,100};
+            Arrays.sort(a);
+            for(int item: a){
+                System.out.print(item+ " ");
+            }
+            findNumAfterMax(a);
+        }
+        private static void findNumAfterMax(int [] a){
+         Arrays.sort(a);
+         System.out.println("Number: " + a[a.length-2]);
+        }
+}
+
+//2.2.6
+
+public class Main {
+        public static void main(String[] args) {
+            int a = 5;
+            int b = 7;
+            int c = 11;
+            if(areSimpl(a,b,c)){
+                System.out.println("Number are relative");
+            }else System.out.println("This numbres not relative");
+        }
+        private static int gcd(int a, int b){
+            if(b==0){
+                return a;
+            }
+            return gcd(b, a%b);
+        }
+
+        private static boolean areSimpl(int a, int b, int c){
+            int ab = gcd(a,b);
+            int ac = gcd(a, c);
+            int bc = gcd(b,c);
+            return (ab == 1&& ac == 1&& bc == 1);
+        }
+}
+
+//2.2.7
+
+public class Main {
+        public static void main(String[] args) {
+        System.out.println("res="+sum(9));
+        }
+        private static int fact(int a){
+            if(a==1){
+                return 1;
+            }
+            return  a* fact(a-1);
+        }
+        private static int sum(int a){
+            int sum = 0;
+            for (int i= 1; i<=a; i+=2){
+                sum += fact(i);
+            }
+            return sum;
+        }
+
+
+
+}
+
+//2.2.8
+
+
+public class Main {
+        public static void main(String[] args) {
+        int [] mass = {1,2,3,4,5,6,7};
+        System.out.println("First sum: "+ diapSum(mass, 0,2) );
+        System.out.println("First sum: "+ diapSum(mass, 2,4) );
+        System.out.println("First sum: "+ diapSum(mass, 3,5) );
+        }
+        private static int diapSum(int [] m,int a, int b){
+            int sum = 0;
+           for (int i = a; i<=b; i++){
+                sum += m[i];
+           }
+           return sum;
+        }
+}
+
+//2.2.9
+import static java.lang.Math.sqrt;
+
+public class Main {
+        public static void main(String[] args) {
+        int x  =10, y =15, z = 7, t = 9;
+        System.out.println("Answer: "+findSquare(x,y,z,t));
+        }
+        private static double findSquare(int x,int y, int z, int t){
+            double hPer = (x+y+z+t)/2;
+            return sqrt((hPer-x)*(hPer-y)*(hPer-z)*(hPer-t));
+        }
+
+}
+
+//2.2.10
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+        public static void main(String[] args) {
+            int n = 10;
+            int [] resArray = makeMass(10);
+            for (int it : resArray){
+                System.out.print(it +" ");
+            }
+        }
+        private static int [] makeMass(int n){
+           Scanner in = new Scanner(System.in);
+           System.out.println("Enter array length->");
+           int len = in.nextInt();
+           int [] arrRes;
+           arrRes = new int[len];
+            Arrays.fill(arrRes, n);
+            return arrRes;
+        }
+}
+
+//2.2.11
+
+public class Main {
+        public static void main(String[] args) {
+            int a = 1000, b = 11250;
+        switch (wheresMore(a, b)) {
+            case 0:
+                System.out.println(a + " is bigger then" + b);
+                break;
+            case 1:
+                System.out.println(b + " is bigger then " + a);
+                break;
+            case 2:
+                System.out.println("Both numbers are equal!");
+        }
+        }
+        private static int  wheresMore(int a, int b){
+           String a1 = Integer.toString(a);
+           String a2 = Integer.toString(b);
+           if(a1.length() > a2.length()){
+               return 0;
+           } else if(a1.length() == a2.length()) return 2;
+           return 1;
+        }
+}
+
+//2.2.12
+
+public class Main {
+        public static void main(String[] args) {
+            int k = 12, n =6;
+            int[] mas = makeArr(k, n);
+            for (int item : mas){
+                System.out.print(item + " ");
+            }
+        }
+        private static int[]  makeArr(int k, int n){
+          int [] a = new int[10];
+          for (int i =0; i< a.length; i++){
+              a[i] = makeNum(k, n);
+          }
+          return a;
+        }
+
+    private static int makeNum(int k, int n) {
+            int num;
+            int tens = 10;
+            num = (int) (Math.random()*n);
+            while(sumOfEl(num) < k){
+                int numt2 = (int) (1+Math.random()*(k-sumOfEl(num)));
+                int numt = (int) (tens*numt2);
+                num+=numt;
+                tens*=10;
+            }
+        return num;
+    }
+
+    private static int sumOfEl(int n){
+            int temp = n;
+            int sum = 0;
+            while (temp!=0){
+                sum += temp%10;
+                temp/=10;
+            }
+            return sum;
+    }
+
+//2.2.13
+public class Main {
+        public static void main(String[] args) {
+            int n = 12;
+            findTwin(12);
+        }
+        private static void findTwin(int s){
+            int e = 2*s;
+            for (int i= s; i <=e-2;i++){
+                int n = i+2;
+                if(isTwin(i, n)) System.out.println("Twin " + i+" "+n);
+            }
+        }
+    private static boolean isTwin(int k, int n) {
+        if(n-k==2) return true;
+        return false;
+    }
+}
+    
+    //2.2.14
+public class Main {
+    public static void main(String[] args) {
+        int k = 12;
+        armstrongNum(153);
+    }
+
+    private static void armstrongNum(int s) {
+        for (int i = 1; i <= s; i++) {
+            if(isArmNumber(i, elOfNum(i))) System.out.println(i);
+        }
+
+    }
+
+    private static boolean isArmNumber(int n, int el) {
+        int temp = n;
+        int sum = 0;
+        int k = 0;
+        while (temp != 0) {
+            k=temp%10;
+            sum += pow(k,el);
+            temp /= 10;
+        }
+        if(n == sum) return true;
+        return false;
+    }
+
+    private static int elOfNum(int n){
+        return  Integer.toString(n).length();
+    }
+}
+
+//2.2.15
+public class Main {
+    public static void main(String[] args) {
+        int k = 1000;
+        isNumSorted(k);
+
+    }
+
+    private static void isNumSorted(int s) {
+        for (int i = 123; i <= s; i++) {
+            if(isSorted(divindNumber(i, elOfNum(i)))) System.out.println(i);
+        }
+    }
+
+    private static int [] divindNumber(int n, int el) {
+        int mass[] = new int[el];
+        int length = el-1 ;
+        int temp = n;
+        int i = 0;
+        int k = 0;
+        while (temp != 0) {
+            k=temp/(int)(pow(10,length));
+            mass[i] = k;
+            temp %= (pow(10,length));
+            length--;
+            i++;
+        }
+        return mass;
+
+    }
+
+    private static int elOfNum(int n){
+        return  Integer.toString(n).length();
+    }
+
+    private static boolean isSorted(int[]mass){
+        for (int i = 0; i < mass.length-1; i++){
+            if (mass[i] >= mass[i+1]) return false;
+            else if( mass[i+1] > mass[i]+1) return false;
+        }
+        return true;
+    }
+}
+    //2.2.16
+public class Main {
+    public static void main(String[] args) {
+        int n = 3;
+        int sum =0;
+        for (int i = (int)pow(10,n-1); i < pow(10,n); i++ ){
+            if(isNumberOdd(i)){
+                sum+=i;
+                System.out.println(i);
+            }
+        }
+        System.out.println("Answer: " + sum);
+        System.out.println("Even numbers in answer: " +howEvenDigit(sum));
+    }
+
+
+    private static boolean isNumberOdd(int n) {
+        int temp = n;
+        int k = 0;
+        while (temp != 0) {
+            k=temp%10;
+            if(k%2==0) return false;
+            temp/=10;
+        }
+        return true;
+    }
+
+    private static int howEvenDigit(int n) {
+        int temp = n;
+        int sum = 0;
+        int k = 0;
+        while (temp != 0) {
+            k=temp%10;
+            if(k%2==0) sum++;
+            temp/=10;
+        }
+        return sum;
+    }
+}
+
+//2.2.17
+public class Main {
+    public static void main(String[] args) {
+        int n = 31;
+        System.out.println("result: " + count(n));
+    }
+
+
+    private static int sumOfEl(int n){
+
+        int temp = n;
+        int sum = 0;
+        while (temp!=0){
+            sum += temp%10;
+            temp/=10;
+        }
+        return sum;
+    }
+
+    private  static int count(int n){
+        if(n<=0) return 0;
+        return 1+count(n-sumOfEl(n));
+    }
+}
+
+//3.1.1
+public class Main {
+    public static void main(String[] args) {
+      String [] array = {"intCount","stringPosition", "boolNeTry"};
+        for (int i = 0; i < array.length; i++){
+            System.out.print(convertToSnakeCase(array[i])+" ");
+        }
+    }
+
+    public static String convertToSnakeCase(String a){
+        char[] charArray = a.toCharArray();
+        String snake ="";
+        for (int i = 0; i < a.length(); i++){
+            char curChar = charArray[i];
+            if(Character.isUpperCase(curChar)){
+                snake +="_"+Character.toLowerCase(curChar);
+            }else snake+=curChar;
+        }
+        return snake;
+    }
+}
+
+//3.1.2
+public class Main {
+    public static void main(String[] args) {
+      String per = "my word is my word";
+        System.out.print(per.replace("word", "letter"));
+    }
+}
+
+//3.1.3
+public class Main {
+    public static void main(String[] args) {
+        int counter = 0;
+      String per = "my word11 is my word22";
+        for (int i = 0; i < per.length(); i++){
+            char curChar = per.charAt(i);
+            if(curChar<=57 && curChar >= 48){
+                counter++;
+            }
+        }
+        System.out.print("Count of numbers in string: "+counter);
+    }
+}
+    
+//3.1.4
+
+    public class Main {
+    public static void main(String[] args) {
+        int countNumber = 0;
+        String per = "my word1111 is11 my324 word22";
+        boolean isDig = false;
+
+        for (int i = 0; i < per.length(); i++) {
+            char curChar = per.charAt(i);
+            if (Character.isDigit(curChar)) {
+                isDig = true;
+                if(isDig && i+1==per.length()) countNumber++;
+            } else if (isDig && !Character.isDigit(curChar)) {
+                countNumber++;
+                isDig = false;
+            }
+        }
+        System.out.print(countNumber);
+    }
+}
+
+    //3.1.5
+    public class Main {
+    public static void main(String[] args) {
+        int countNumber = 0;
+        String per = "     my  word   is     my word     ";
+        System.out.print(per.trim().replaceAll("\\s+"," "));
+    }
+}
+
+    //3.2.1
+public class Main {
+    public static void main(String[] args) {
+        String per = "       my  word   is     my word     ";
+        System.out.print("Max spaces: "+findMaxSpace(per));
+    }
+
+    private static int findMaxSpace(String inp){
+        int maxSpace = 0;
+        int currentSpaces = 0;
+
+        char [] charArray = inp.toCharArray();
+        for (int i = 0; i < charArray.length; i++){
+            char currentChar = inp.charAt(i);
+            if(currentChar == 32){
+                currentSpaces++;
+                if(currentSpaces>maxSpace) maxSpace = currentSpaces;
+            }else{
+                currentSpaces=0;
+            }
+        }
+        return maxSpace;
+    }
+}
+    //3.2.2
+
+public class Main {
+    public static void main(String[] args) {
+        String per = "aaa aaa";
+        System.out.print(insBAftA(per));
+    }
+
+    private static String insBAftA(String inp){
+    StringBuilder res = new StringBuilder();
+    for (int i =0; i < inp.length(); i++){
+        char curChar = inp.charAt(i);
+        res.append(curChar);
+        if(curChar == 'a')res.append('b');
+        }
+        return res.toString();
+    }
+}
+
+//3.2.3
+public class Main {
+    public static void main(String[] args) {
+        String per = "aaabbb";
+        System.out.print(palCheck(per));
+    }
+
+    private static boolean palCheck(String inp){
+        int len = inp.length();
+        for (int i =0;i <len/2; i++){
+            if(inp.charAt(i)!=inp.charAt(len-i-1)) return false;
+        }
+        return true;
+    }
+}
+    //3.2.4
+public class Main {
+    public static void main(String[] args) {
+        String per = "информатика";
+        System.out.print(makeCake(per));
+    }
+
+    private static String makeCake(String inp){
+       String p1, p2, p3;
+        int a = findLetter(inp,'т');
+       p1 = inp.substring(a,a+1);
+        a = findLetter(inp, 'о');
+       p2 = inp.substring(a, a+1);
+        a = findLetter(inp, 'р');
+       p3 = inp.substring(a, a+1);
+       String res = p1+p2+p3+p1;
+       return  res;
+    }
+
+    private static int findLetter(String inp, char letter){
+        for (int i =0; i < inp.length(); i++){
+            char curChar = inp.charAt(i);
+            if(curChar == letter) return i;
+        }
+        return 0;
+    }
+}
+    //3.2.5
+public class Main {
+    public static void main(String[] args) {
+        String per = "aaaaaa информатика";
+        System.out.print(countA(per));
+    }
+
+    private static int countA(String inp){
+        int counter = 0;
+      for (int i = 0; i<inp.length(); i++){
+          char curChar = inp.charAt(i);
+          if(curChar == 'а' || curChar == 'a') counter++;
+      }
+      return counter;
+    }
+}
+    //3.2.6
+public class Main {
+    public static void main(String[] args) {
+        String per = "информатика";
+        System.out.print(newDoubledString(per));
+    }
+
+    private static String newDoubledString(String inp) {
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < inp.length(); i++) {
+            char curChar = inp.charAt(i);
+            res.append(curChar).append(curChar);
+        }
+        return res.toString();
+    }
+}
+    //3.2.7
+public class Main {
+    public static void main(String[] args) {
+        String per = " информа тика  ";
+        System.out.print(clearString(per));
+    }
+
+    private static String clearString(String inp) {
+        String res = "";
+        for (int i = 0; i < inp.length(); i++) {
+            char curChar = inp.charAt(i);
+            if(curChar!=' ' && !res.contains(String.valueOf(curChar))){
+                res+=curChar;
+            }
+        }
+        return res;
+    }
+}
+    //3.2.8
+public class Main {
+    public static void main(String[] args) {
+        String per = " информа тика nbnffd  ";
+        System.out.print(findBiggestStr(per));
+    }
+
+    private static String findBiggestStr(String inp) {
+        String max = " ";
+        String res = "";
+       for (int i = 0; i<inp.length(); i++){
+           char curChar = inp.charAt(i);
+           if(curChar!=' '){
+               res+=curChar;
+           }else res =" ";
+           if(max.length()<res.length()) max = res;
+       }
+        return max;
+    }
+}
+
+//3.2.9
+public class Main {
+    public static void main(String[] args) {
+        String per = " иНформа тика nbnffd  ";
+      findLowAndBigg(per);
+    }
+
+    private static void findLowAndBigg(String inp) {
+        int upp = 0;
+        int low = 0;
+        for (int i = 0; i < inp.length(); i++){
+            char curChar = inp.charAt(i);
+            if(Character.isUpperCase(curChar)) upp++;
+            if(Character.isLowerCase(curChar)) low++;
+        }
+        System.out.print("Letter in Uppercase: " + upp +"\nIn lowercase: "+low);
+    }
+}
+    //3.2.10
+public class Main {
+    public static void main(String[] args) {
+        String per = " иНформа? тика. nbnffd!  ";
+      System.out.print(findCountOfSug(per));
+    }
+
+    private static int findCountOfSug(String inp) {
+        int countSuq = 0;
+       for (int i = 0; i < inp.length(); i++){
+           char curChar = inp.charAt(i);
+           if(curChar=='!' || curChar == '.' || curChar =='?'){
+                countSuq++;
+           }
+       }
+       return countSuq;
+    }
+}
+    //4.1.1
+public class Main {
+    public static void main(String[] args) {
+        Test1 t1 = new Test1();
+        t1.setV1andV2(1,2);
+        System.out.println(t1.sumV1andV2());
+        t1.showMax();
+    }
+
+    public static class Test1{
+        private int v1;
+        private int v2;
+
+
+        public void showV1() {
+            System.out.print(v1);
+        }
+        public void showV2() {
+            System.out.print(v2);
+        }
+
+        public void setV1andV2(int a, int b){
+            v1 = a;
+            v2 = b;
+        }
+
+        public int sumV1andV2(){
+            return v1+v2;
+        }
+
+        public void showMax(){
+            System.out.print(Math.max(v1, v2));
+        }
+    }
+}
+    //4.1.2
+public class Main {
+    public static void main(String[] args) {
+        Test2 t2 = new Test2();
+        Test2 t22 = new Test2(1,2);
+        System.out.println(t2.getV1() +" "+t2.getV2());
+        System.out.println(t22.getV1() +" "+t22.getV2());
+        t2.setV1(10);
+        t2.setV2(20);
+        System.out.println("After changes: "+t2.getV1() +" "+t2.getV2());
+    }
+
+    public static class Test2{
+        private int v1;
+        private int v2;
+
+        Test2(int a, int b ){
+            v1 = a;
+            v2 = b;
+        }
+        Test2(){
+            v1 = 4;
+            v2 = 6;
+        }
+
+        public int getV1() {
+            return v1;
+        }
+        public void setV1(int a ) {
+            v1 =a;
+        }
+        public int getV2() {
+            return v2;
+        }
+        public void setV2(int a ) {
+            v2 =a;
+        }
+    }
+}
