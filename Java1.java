@@ -2385,3 +2385,189 @@ public class Main {
         }
     }
 }
+//4.1.3
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+       Student [] groups = new Student[4];
+       int [] progress = new int[5];
+        Scanner in = new Scanner(System.in);
+       for (int i = 0; i < groups.length; i++) {
+           groups[i] = new Student();
+           for (int j = 0; j < progress.length; j++) {
+               System.out.println("Enter "+ (j+1) +"-th grade: ");
+                progress[j] = in.nextInt();
+           }
+           groups[i].setAcademicProgress(progress);
+           groups[i].showSurname();
+           groups[i].showNumberOfGroup();
+       }
+    }
+
+    public static class Student {
+       private  String surname = "test";
+       public String initials = "T.C";
+        private  int numberOfGroup = 5142222;
+        private int [] academicProgress = new int[5];
+
+       public void showSurname(){
+           if(Arrays.stream(academicProgress).allMatch(n->(n==9&&n==10)))
+           System.out.println("Student surname: "+ surname);
+           else{
+               System.out.println("Student is not excellence");
+           }
+       }
+
+       public void showNumberOfGroup(){
+           if(Arrays.stream(academicProgress).allMatch(n->(n==9&&n==10)))
+           System.out.println("Student's group number: " + numberOfGroup);
+           else{
+               System.out.println("Student is not excellence");
+           }
+       }
+
+       public void setAcademicProgress(int [] arr){
+           academicProgress = arr;
+       }
+       
+    }
+}
+
+//4.1.4
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Train[] trainPark = new Train[2];
+        Scanner in = new Scanner(System.in);
+
+        for (int i = 0; i < trainPark.length; i++) {
+            System.out.print("Enter destiantion for train #" + (i + 1) + ": ");
+            String dest = in.nextLine();
+            System.out.print("Enter train number for train #" + (i + 1) + ": ");
+            int trainNum = in.nextInt();
+            in.nextLine();
+            System.out.print("Enter departure time: ");
+            String depTime = in.nextLine();
+            trainPark[i] = new Train(dest, trainNum, depTime);
+        }
+        sortByNumber(trainPark);
+
+        for (Train train : trainPark) {
+            System.out.print(train.getDestination() + " " + train.getTrainNumber() + " " + train.getDepartureTime() + "\n");
+        }
+        //поиск поезда по номеру
+        System.out.print("Enter train number to get info: ");
+        int trainNumber = in.nextInt();
+        for (Train item : trainPark) {
+            if (item.getTrainNumber() == trainNumber) {
+                System.out.println(item.getTrainNumber() + " " + item.getDestination() + " " + item.getDepartureTime());
+                break;
+            }
+        }
+
+        //сортировка массива по пункту назначения
+        Arrays.sort(trainPark,(t1,t2)->{
+            int desComp =t1.getDestination().compareTo(t2.getDestination())
+            if(desComp!= 0){
+                return desComp;
+            }else{
+                return t1.getDepartureTime().compareTo(t2.getDepartureTime());
+            }
+        });
+
+    }
+    public static void sortByNumber(Train[] arr){
+        Arrays.sort(arr, (t1,t2)->t1.getTrainNumber()-t2.getTrainNumber());
+    }
+
+    public static class Train {
+        private String destination;
+        private int trainNumber;
+        private String departureTime;
+
+        public Train(String dest, int trainNum, String depTime) {
+            destination = dest;
+            trainNumber = trainNum;
+            departureTime = depTime;
+        }
+
+        public String getDestination() {
+            return destination;
+        }
+
+        public int getTrainNumber() {
+            return trainNumber;
+        }
+
+        public String getDepartureTime() {
+            return departureTime;
+        }
+
+        public void setDestination(String dest) {
+            destination = dest;
+        }
+
+        public void setTrainNumber(int trNun) {
+            trainNumber = trNun;
+        }
+
+        public void setDepartureTime(String depTime) {
+            departureTime = depTime;
+        }
+    }
+}
+
+//4.1.5
+public class Main {
+    public static void main(String[] args) {
+        DecimalCounter coun = new DecimalCounter();
+        System.out.println("First counter value: "+coun.getVal());
+        coun.increase();
+        System.out.println("Counter after increasing by 1: "+coun.getVal());
+        coun.reduce();
+        System.out.println("Counter after reducing by 1: "+coun.getVal());
+        DecimalCounter coun2 = new DecimalCounter(1, 2, 7);
+        System.out.println("Counter2 value: "+coun2.getVal());
+        coun2.increase();
+        System.out.println("Counter2 after increasing by 1: "+coun2.getVal());
+        coun2.reduce();
+        System.out.println("Counter2 after reducing by 1: "+coun2.getVal());
+    }
+
+
+    public static class DecimalCounter {
+        private int val;
+        private final int minVal;
+        private final int maxVal;
+
+        public DecimalCounter(){
+            val = 0;
+            minVal = 0;
+            maxVal = 20;
+        }
+
+        public DecimalCounter(int mv, int v, int maxv){
+            val = v;
+            minVal = mv;
+            maxVal = maxv;
+        }
+
+        public void increase(){
+            if(val < maxVal) val++;
+        }
+
+        public void reduce(){
+            if(val>minVal)val--;
+        }
+
+        public int getVal(){
+            return val;
+        }
+
+
+    }
+}
